@@ -1,7 +1,8 @@
-# dual-pane.yazi
+# double-pane.yazi
 
-[dual-pane.yazi](https://github.com/dawsers/dual-pane.yazi) provides simple
-dual pane navigation for [yazi](https://github.com/sxyazi/yazi/), in a similar
+[double-pane.yazi](https://github.com/exakey/double-pane.yazi) is a fork of
+[dual-pane.yazi](https://github.com/dawsers/dual-pane.yazi) as it is archived y now.
+Plugin provides dual pane navigation for [yazi](https://github.com/sxyazi/yazi/), in a similar
 fashion to [vifm](https://github.com/vifm/vifm) or [midnight commander](https://midnight-commander.org/).
 
 ## Requirements
@@ -11,13 +12,13 @@ fashion to [vifm](https://github.com/vifm/vifm) or [midnight commander](https://
 ## Installation
 
 ```sh
-ya pack -a dawsers/dual-pane
+ya pack -a dawsers/double-pane
 ```
 
 Modify your `~/.config/yazi/init.lua` to include:
 
 ``` lua
-require("dual-pane"):setup()
+require("double-pane"):setup()
 ```
 
 ## Options
@@ -27,7 +28,7 @@ The plugin supports the following options, which can be assigned during setup:
 1. `enabled`: If true, the plugin is enabled at yazi's startup. The default value is false.
 
 ``` lua
-require("dual-pane"):setup({
+require("double-pane"):setup({
   enabled = true,
 })
 ``````
@@ -41,28 +42,28 @@ Choose your own key bindings or use these in your `~/.config/yazi/keymap.toml`:
 ``` toml
 [manager]
 prepend_keymap = [
-    { on = [ "b", "t" ], run = "plugin --sync dual-pane --args=toggle", desc = "Dual-pane: toggle" },
-    { on = [ "b", "b" ], run = "plugin --sync dual-pane --args=toggle_zoom", desc = "Dual-pane: toggle zoom" },
-    { on = "<Tab>", run = "plugin --sync dual-pane --args=next_pane",  desc = "Dual-pane: switch to the other pane" },
-    { on = "[", run = "plugin --sync dual-pane --args='tab_switch -1 --relative'",  desc = "Dual-pane: switch active to previous tab" },
-    { on = "]", run = "plugin --sync dual-pane --args='tab_switch 1 --relative'",  desc = "Dual-pane: switch active to next tab" },
-    { on = "1", run = "plugin --sync dual-pane --args='tab_switch 0'", desc = "Switch to the first tab" },
-    { on = "2", run = "plugin --sync dual-pane --args='tab_switch 1'", desc = "Switch to the second tab" },
-    { on = "3", run = "plugin --sync dual-pane --args='tab_switch 2'", desc = "Switch to the third tab" },
-    { on = "4", run = "plugin --sync dual-pane --args='tab_switch 3'", desc = "Switch to the fourth tab" },
-    { on = "5", run = "plugin --sync dual-pane --args='tab_switch 4'", desc = "Switch to the fifth tab" },
-    { on = "6", run = "plugin --sync dual-pane --args='tab_switch 5'", desc = "Switch to the sixth tab" },
-    { on = "7", run = "plugin --sync dual-pane --args='tab_switch 6'", desc = "Switch to the seventh tab" },
-    { on = "8", run = "plugin --sync dual-pane --args='tab_switch 7'", desc = "Switch to the eighth tab" },
-    { on = "9", run = "plugin --sync dual-pane --args='tab_switch 8'", desc = "Switch to the ninth tab" },
-    { on = "t", run = "plugin --sync dual-pane --args='tab_create --current'",  desc = "Dual-pane: create a new tab with CWD" },
-    { on = "<F5>", run = "plugin --sync dual-pane --args='copy_files --follow'",  desc = "Dual-pane: copy selected files from active to inactive pane" },
-    { on = "<F6>", run = "plugin --sync dual-pane --args='move_files --follow'",  desc = "Dual-pane: move selected files from active to inactive pane" },
-    { on = [ "b", "s" ], run = "plugin --sync dual-pane --args=save_config", desc = "Dual-pane: save current configuration" },
-    { on = [ "b", "l" ], run = "plugin --sync dual-pane --args=load_config", desc = "Dual-pane: load saved configuration" },
-    { on = [ "b", "r" ], run = "plugin --sync dual-pane --args=reset_config", desc = "Dual-pane: reset saved configuration" },
-    { on = [ "b", "c" ], run = "plugin dual-pane --args='shell_fzf /home/dawsers/.config/yazi/dual-pane.txt'", desc = "Dual-pane: run command (use fzf)" },
-    { on = [ "b", "i" ], run = "plugin dual-pane --args='shell_fzf --interactive /home/dawsers/.config/yazi/dual-pane.txt'", desc = "Dual-pane: run command interactively (use fzf)" },
+    { on = [ "b", "t" ], run = "plugin --sync double-pane --args=toggle", desc = "Dual-pane: toggle" },
+    { on = [ "b", "b" ], run = "plugin --sync double-pane --args=toggle_zoom", desc = "Dual-pane: toggle zoom" },
+    { on = "<Tab>", run = "plugin --sync double-pane --args=next_pane",  desc = "Dual-pane: switch to the other pane" },
+    { on = "[", run = "plugin --sync double-pane --args='tab_switch -1 --relative'",  desc = "Dual-pane: switch active to previous tab" },
+    { on = "]", run = "plugin --sync double-pane --args='tab_switch 1 --relative'",  desc = "Dual-pane: switch active to next tab" },
+    { on = "1", run = "plugin --sync double-pane --args='tab_switch 0'", desc = "Switch to the first tab" },
+    { on = "2", run = "plugin --sync double-pane --args='tab_switch 1'", desc = "Switch to the second tab" },
+    { on = "3", run = "plugin --sync double-pane --args='tab_switch 2'", desc = "Switch to the third tab" },
+    { on = "4", run = "plugin --sync double-pane --args='tab_switch 3'", desc = "Switch to the fourth tab" },
+    { on = "5", run = "plugin --sync double-pane --args='tab_switch 4'", desc = "Switch to the fifth tab" },
+    { on = "6", run = "plugin --sync double-pane --args='tab_switch 5'", desc = "Switch to the sixth tab" },
+    { on = "7", run = "plugin --sync double-pane --args='tab_switch 6'", desc = "Switch to the seventh tab" },
+    { on = "8", run = "plugin --sync double-pane --args='tab_switch 7'", desc = "Switch to the eighth tab" },
+    { on = "9", run = "plugin --sync double-pane --args='tab_switch 8'", desc = "Switch to the ninth tab" },
+    { on = "t", run = "plugin --sync double-pane --args='tab_create --current'",  desc = "Dual-pane: create a new tab with CWD" },
+    { on = "<F5>", run = "plugin --sync double-pane --args='copy_files --follow'",  desc = "Dual-pane: copy selected files from active to inactive pane" },
+    { on = "<F6>", run = "plugin --sync double-pane --args='move_files --follow'",  desc = "Dual-pane: move selected files from active to inactive pane" },
+    { on = [ "b", "s" ], run = "plugin --sync double-pane --args=save_config", desc = "Dual-pane: save current configuration" },
+    { on = [ "b", "l" ], run = "plugin --sync double-pane --args=load_config", desc = "Dual-pane: load saved configuration" },
+    { on = [ "b", "r" ], run = "plugin --sync double-pane --args=reset_config", desc = "Dual-pane: reset saved configuration" },
+    { on = [ "b", "c" ], run = "plugin double-pane --args='shell_fzf /home/dawsers/.config/yazi/double-pane.txt'", desc = "Dual-pane: run command (use fzf)" },
+    { on = [ "b", "i" ], run = "plugin double-pane --args='shell_fzf --interactive /home/dawsers/.config/yazi/double-pane.txt'", desc = "Dual-pane: run command interactively (use fzf)" },
 ]
 ```
 
@@ -85,7 +86,7 @@ prepend_keymap = [
 
 ### Shell Commands
 
-*dual-pane* supports running shell commands with macro expansion, similar to
+*double-pane* supports running shell commands with macro expansion, similar to
 other dual pane file managers.
 
 | Macro |                    Meaning                                        |
@@ -122,12 +123,12 @@ Arguments:
 ``` toml
 [manager]
 prepend_keymap = [
-    { on = [ "c", "c" ], run = "plugin dual-pane --args='shell --block --interactive'", desc = "Dual-pane: run blocking command interactively" },
-    { on = [ "c", "i" ], run = "plugin dual-pane --args='shell --interactive'", desc = "Dual-pane: run command interactively" },
-    { on = [ "c", "d" ], run = "plugin dual-pane --args='shell --block nvim -d %c %C --interactive'", desc = "Dual-pane: diff files" },
-    { on = [ "c", "D" ], run = "plugin dual-pane --args='shell --block nvim -c \"DirDiff %d %D\"'", desc = "Dual-pane: diff dirs" },
-    { on = [ "c", "u" ], run = "plugin dual-pane --args='shell --block ouch decompress --dir=%D %f'", desc = "Dual-pane: decompress with ouch" },
-    { on = [ "c", "p" ], run = "plugin dual-pane --args='shell --block ouch compress %f %D/%d:n.tar.gz'", desc = "Dual-pane: compress with ouch" },
+    { on = [ "c", "c" ], run = "plugin double-pane --args='shell --block --interactive'", desc = "Dual-pane: run blocking command interactively" },
+    { on = [ "c", "i" ], run = "plugin double-pane --args='shell --interactive'", desc = "Dual-pane: run command interactively" },
+    { on = [ "c", "d" ], run = "plugin double-pane --args='shell --block nvim -d %c %C --interactive'", desc = "Dual-pane: diff files" },
+    { on = [ "c", "D" ], run = "plugin double-pane --args='shell --block nvim -c \"DirDiff %d %D\"'", desc = "Dual-pane: diff dirs" },
+    { on = [ "c", "u" ], run = "plugin double-pane --args='shell --block ouch decompress --dir=%D %f'", desc = "Dual-pane: decompress with ouch" },
+    { on = [ "c", "p" ], run = "plugin double-pane --args='shell --block ouch compress %f %D/%d:n.tar.gz'", desc = "Dual-pane: compress with ouch" },
 ]
 ```
 
@@ -154,7 +155,7 @@ The format of `cmd_file` is as follows:
 
 For example:
 
-`/home/dawsers/.config/yazi/dual-pane.txt`
+`/home/dawsers/.config/yazi/double-pane.txt`
 
 ```
 run = "kitty", desc = "Dual-pane: terminal", block = false
@@ -171,8 +172,8 @@ run = "ouch compress %f %D/%d:n.7z", desc = "Dual-pane: 7z compress with ouch", 
 ``` toml
 [manager]
 prepend_keymap = [
-    { on = [ "b", "c" ], run = "plugin dual-pane --args='shell_fzf /home/dawsers/.config/yazi/dual-pane.txt'", desc = "Dual-pane: run command (use fzf)" },
-    { on = [ "b", "i" ], run = "plugin dual-pane --args='shell_fzf --interactive /home/dawsers/.config/yazi/dual-pane.txt'", desc = "Dual-pane: run command interactively (use fzf)" },
+    { on = [ "b", "c" ], run = "plugin double-pane --args='shell_fzf /home/dawsers/.config/yazi/double-pane.txt'", desc = "Dual-pane: run command (use fzf)" },
+    { on = [ "b", "i" ], run = "plugin double-pane --args='shell_fzf --interactive /home/dawsers/.config/yazi/double-pane.txt'", desc = "Dual-pane: run command interactively (use fzf)" },
 ]
 ```
 
@@ -181,13 +182,13 @@ prepend_keymap = [
 This short tutorial is based on the key bindings above, but you can create
 your own.
 
-When you start yazi, you can start *dual-pane* by pressing `bt`. It will create
+When you start yazi, you can start *double-pane* by pressing `bt`. It will create
 a dual pane view with the current directory on both panes if there is only one
 tab open, or the first and second tabs if there are more than one. If you want
-to use *dual-pane* as your default yazi view, you can set the `enabled` option
+to use *double-pane* as your default yazi view, you can set the `enabled` option
 in `setup()` as described above.
 
-`bt` will exit *dual-pane* again (it is a toggle), while pressing `bb` will still
+`bt` will exit *double-pane* again (it is a toggle), while pressing `bb` will still
 keep you in dual pane mode, but zooming the active pane for better visibility.
 For example, you could use [toggle-view.yazi](https://github.com/dawsers/toggle-view.yazi)
 to toggle on/off the preview or parent directory if you want more details.
@@ -261,7 +262,7 @@ prepend_keymap = [
 ]
 ```
 
-There may be some incompatibilities between *dual-pane* and certain plugins or
+There may be some incompatibilities between *double-pane* and certain plugins or
 yazi commands. The reason is this plugin is not integrated in the core, and needs
 to hijack certain procedures to work as seamlessly as possible.
 
