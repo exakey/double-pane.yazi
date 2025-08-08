@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "workspace.library": [],
+    "diagnostics.disable": [
+        "trailing-space",
+        "unused-function",
+        "lowercase-global",
+    ],
+    "diagnostics.globals": [
+        "ya"
+    ],
+}
