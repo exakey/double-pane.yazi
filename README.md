@@ -1,13 +1,9 @@
 # double-pane.yazi
 
 [double-pane.yazi](https://github.com/exakey/double-pane.yazi) is a fork of
-[dual-pane.yazi](https://github.com/dawsers/dual-pane.yazi) as it is archived y now.
+[dual-pane.yazi](https://github.com/dawsers/dual-pane.yazi) as it is archived by now.
 Plugin provides dual pane navigation for [yazi](https://github.com/sxyazi/yazi/), in a similar
 fashion to [vifm](https://github.com/vifm/vifm) or [midnight commander](https://midnight-commander.org/).
-
-## Requirements
-
-- [Yazi](https://github.com/sxyazi/yazi/) v0.3
 
 ## Installation
 
