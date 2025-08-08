@@ -260,9 +260,9 @@ local DualPane = {
 
                         local s = ya.readable_path(tostring(header._tab.current.cwd)) .. header:flags()
                         if header.pane == self.pane then
-                                return ui.Span(ya.truncate(s, { max = max, rtl = true })):style(THEME.manager.tab_active)
+                                return ui.Span(ya.truncate(s, { max = max, rtl = true })):style(th.mgr.tab_active)
                         else
-                                return ui.Span(ya.truncate(s, { max = max, rtl = true })):style(THEME.manager
+                                return ui.Span(ya.truncate(s, { max = max, rtl = true })):style(th.mgr
                                 .tab_inactive)
                         end
                 end
@@ -278,14 +278,14 @@ local DualPane = {
                         local spans = {}
                         for i = 1, tabs do
                                 local text = i
-                                if THEME.manager.tab_width > 2 then
+                                if th.mgr.tab_width > 2 then
                                         text = ya.truncate(text .. " " .. cx.tabs[i]:name(),
-                                                { max = THEME.manager.tab_width })
+                                                { max = th.mgr.tab_width })
                                 end
                                 if i == active then
-                                        spans[#spans + 1] = ui.Span(" " .. text .. " "):style(THEME.manager.tab_active)
+                                        spans[#spans + 1] = ui.Span(" " .. text .. " "):style(th.mgr.tab_active)
                                 else
-                                        spans[#spans + 1] = ui.Span(" " .. text .. " "):style(THEME.manager.tab_inactive)
+                                        spans[#spans + 1] = ui.Span(" " .. text .. " "):style(th.mgr.tab_inactive)
                                 end
                         end
                         return ui.Line(spans)
@@ -375,7 +375,7 @@ local DualPane = {
                         self._destroy(self)
                         self.view = nil
                 end
-                ya.app_emit("resize", {})
+                ya.emit("resize", {})
         end,
 
         toggle_zoom = function(self)
@@ -387,7 +387,7 @@ local DualPane = {
                                 self._config_dual_pane(self)
                                 self.view = 0
                         end
-                        ya.app_emit("resize", {})
+                        ya.emit("resize", {})
                 end
         end,
 
@@ -395,8 +395,8 @@ local DualPane = {
                 if self.view and self.pane then
                         self.pane = self.pane % 2 + 1
                         local tab = self.tabs[self.pane]
-                        ya.manager_emit("tab_switch", { tab - 1 })
-                        ya.app_emit("resize", {})
+                        ya.mgr_emit("tab_switch", { tab - 1 })
+                        ya.emit("resize", {})
                 end
         end,
 
@@ -408,19 +408,19 @@ local DualPane = {
                         local dst_tab = self.tabs[self.pane % 2 + 1]
                         -- yank selected
                         if cut then
-                                ya.manager_emit("yank", { cut = true })
+                                ya.mgr_emit("yank", { cut = true })
                         else
-                                ya.manager_emit("yank", {})
+                                ya.mgr_emit("yank", {})
                         end
                         -- select dst tab
-                        ya.manager_emit("tab_switch", { dst_tab - 1 })
+                        ya.mgr_emit("tab_switch", { dst_tab - 1 })
                         -- paste
-                        ya.manager_emit("paste", { force = force, follow = follow })
+                        ya.mgr_emit("paste", { force = force, follow = follow })
                         -- unyank
-                        ya.manager_emit("unyank", {})
+                        ya.mgr_emit("unyank", {})
                         -- select src tab again
-                        ya.manager_emit("tab_switch", { src_tab - 1 })
-                        ya.app_emit("resize", {})
+                        ya.mgr_emit("tab_switch", { src_tab - 1 })
+                        ya.emit("resize", {})
                 end
         end,
 
@@ -428,7 +428,7 @@ local DualPane = {
                 if self.pane then
                         self.tabs[self.pane] = tab_number
                 end
-                ya.manager_emit("tab_switch", { tab_number - 1 })
+                ya.mgr_emit("tab_switch", { tab_number - 1 })
         end,
 
         load_config = function(self, state)
@@ -438,26 +438,26 @@ local DualPane = {
                 local len = #cx.tabs
                 -- First switch to the last tab, as new ones will be inserted after the
                 -- active one
-                ya.manager_emit("tab_switch", { len - 1 })
+                ya.mgr_emit("tab_switch", { len - 1 })
                 -- Add stored tabs
                 for _, path in ipairs(state.paths) do
-                        ya.manager_emit("tab_create", { path.cwd })
+                        ya.mgr_emit("tab_create", { path.cwd })
                         if path.file ~= "" then
-                                ya.manager_emit("reveal", { path.file })
+                                ya.mgr_emit("reveal", { path.file })
                         end
                 end
                 -- Now delete the old ones
                 for i = 1, len do
-                        ya.manager_emit("tab_close", { 0 })
+                        ya.mgr_emit("tab_close", { 0 })
                 end
                 self.tabs = { state.tabs[1], state.tabs[2] }
                 self.pane = state.pane
                 -- Refresh other pane
-                ya.manager_emit("tab_switch", { self.tabs[self.pane % 2 + 1] - 1 })
-                ya.manager_emit("refresh", {})
+                ya.mgr_emit("tab_switch", { self.tabs[self.pane % 2 + 1] - 1 })
+                ya.mgr_emit("refresh", {})
 
-                ya.manager_emit("tab_switch", { self.tabs[self.pane] - 1 })
-                ya.app_emit("resize", {})
+                ya.mgr_emit("tab_switch", { self.tabs[self.pane] - 1 })
+                ya.emit("resize", {})
         end,
 
         save_config = function(self, state)
@@ -492,7 +492,7 @@ local DualPane = {
         shell = function(self, state, cmd, blocking)
                 local expanded = _expand_macros(cmd)
                 if expanded ~= "" then
-                        ya.manager_emit("shell", { block = blocking, orphan = true, confirm = true, expanded })
+                        ya.mgr_emit("shell", { block = blocking, orphan = true, confirm = true, expanded })
                 end
         end
 }
@@ -580,9 +580,9 @@ local function entry(state, args)
                         else
                                 dir = args[2]
                         end
-                        ya.manager_emit("tab_create", { dir })
+                        ya.mgr_emit("tab_create", { dir })
                 else
-                        ya.manager_emit("tab_create", {})
+                        ya.mgr_emit("tab_create", {})
                 end
                 -- The new tab is cx.tabs.idx + 1, so we need to correct the non-active
                 -- pane if its tab number is higher than the one in the non-active
@@ -593,7 +593,7 @@ local function entry(state, args)
                 end
                 DualPane:tab_switch(cx.tabs.idx + 1)
                 -- At this point, the new tab may have not been created yet, as
-                -- ya.manager_emit() is not synchronous. So we have the "other" pane
+                -- ya.mgr_emit() is not synchronous. So we have the "other" pane
                 -- in a limbo state until we switch to it manually (ordering doesn't
                 -- respect the global configuration)
         elseif action == "load_config" then
